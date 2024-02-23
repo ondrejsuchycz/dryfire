@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Náhodná cvičení</title>
+</head>
+<body>
+    <script>
+        // Seznam stálých cvičení
+        const staticExercises = [
+            "rozcvička rukou",
+            "rozcvička hlavy"
+        ];
+
+        // Seznam cvičení s pravděpodobnostmi
+        const exercises = [
+            { name: "kliky", probability: 3 },
+            { name: "dřepy", probability: 3 },
+            { name: "kotoul", probability: 5 },
+            { name: "mobilizace páteře", probability: 10 },
+            { name: "švihadlo", probability: 10 },
+            { name: "výskoky", probability: 5 }
+        ];
+
+        // Vypsání seznamu stálých cvičení
+        console.log("Seznam stálých cvičení:");
+        for (const exercise of staticExercises) {
+            console.log(exercise);
+        }
+
+        // Funkce pro náhodný výběr cvičení
+        function getRandomExercise() {
+            const totalProbability = exercises.reduce((sum, exercise) => sum + exercise.probability, 0);
+            const randomValue = Math.random() * totalProbability;
+
+            let cumulativeProbability = 0;
+            for (const exercise of exercises) {
+                cumulativeProbability += exercise.probability;
+                if (randomValue < cumulativeProbability) {
+                    return exercise.name;
+                }
+            }
+        }
+
+        // Generování náhodné posloupnosti 4 cvičení
+        console.log("\nNáhodná posloupnost 4 cvičení:");
+        for (let i = 0; i < 4; i++) {
+            const randomExercise = getRandomExercise();
+            console.log(`Cvičení ${i + 1}: ${randomExercise}`);
+        }
+    </script>
+</body>
+</html>
